@@ -9,6 +9,7 @@
 #include <grp.h>
 #include <pwd.h>
 #include <dirent.h>
+#include <time.h>
 
 #include "list.h"
 
@@ -35,7 +36,7 @@ void init()
 void readDirectory()
 {
     char* directory_path = List_trim(directoryList);
-    //printf("%s\n", directory_path);
+    printf("%s\n", directory_path);
     DIR* d = opendir(directory_path);
     if(d == NULL){
         perror("Error opening directory.\n");
@@ -49,12 +50,94 @@ void readDirectory()
         }
 
         if (stat(dp->d_name, &buf) == -1) {
-            //perror("Error retrieving file information");
+            perror("Error retrieving file information");
             continue;
         }
         switch(flag){
             case 1:
-                printf("%ld %s ", buf.st_ino, dp->d_name);
+                printf("%ld %s \n", buf.st_ino, dp->d_name);
+                break;
+
+            case 2:
+                //print permission (1st column)
+                printf("%c", (S_ISDIR(buf.st_mode)) ? 'd' : '-');
+                printf((buf.st_mode & S_IRUSR) ? "r" : "-");
+                printf((buf.st_mode & S_IWUSR) ? "w" : "-");
+                printf((buf.st_mode & S_IXUSR) ? "x" : "-");
+                printf((buf.st_mode & S_IRGRP) ? "r" : "-");
+                printf((buf.st_mode & S_IWGRP) ? "w" : "-");
+                printf((buf.st_mode & S_IXGRP) ? "x" : "-");
+                printf((buf.st_mode & S_IROTH) ? "r" : "-");
+                printf((buf.st_mode & S_IWOTH) ? "w" : "-");
+                printf((buf.st_mode & S_IXOTH) ? "x " : "- ");
+
+                //print # of hard link (2nd column)
+                printf("%lu ", buf.st_nlink);
+
+                //print the owner of the file (3rd column)
+                struct passwd *pwd1 = getpwuid(buf.st_uid);
+                printf("%s ", pwd1->pw_name);
+
+                //print the name of the group file belongs to (4th column)
+                struct group *grp1 = getgrgid(buf.st_gid);
+                printf("%s", grp1->gr_name);
+
+                //print the size of the file in bytes (5th column)
+                printf("%8ld ", buf.st_size); //Size being occupied by 8 characters (changeable) to align numbers to the right
+                
+                //print the date and time of the most recent change (6th column)
+                time_t lastModified1 = buf.st_mtime;
+                struct tm* time1;
+                time1 = localtime(&lastModified1);
+                char buffer1[80];
+                strftime(buffer1, 80, "%b %e %Y %H:%M", time1);
+                printf("%s ", buffer1);
+
+                //print the name of the file or directory (7th column)
+                printf("%s \n", dp->d_name);
+                break;
+
+            case 3:
+                //print serial number (1st column)
+                printf("%10ld ", buf.st_ino); //Size being occupied by 8 characters (changeable) to align numbers to the right
+
+                //print permission (2nd column)
+                printf("%c", (S_ISDIR(buf.st_mode)) ? 'd' : '-');
+                printf((buf.st_mode & S_IRUSR) ? "r" : "-");
+                printf((buf.st_mode & S_IWUSR) ? "w" : "-");
+                printf((buf.st_mode & S_IXUSR) ? "x" : "-");
+                printf((buf.st_mode & S_IRGRP) ? "r" : "-");
+                printf((buf.st_mode & S_IWGRP) ? "w" : "-");
+                printf((buf.st_mode & S_IXGRP) ? "x" : "-");
+                printf((buf.st_mode & S_IROTH) ? "r" : "-");
+                printf((buf.st_mode & S_IWOTH) ? "w" : "-");
+                printf((buf.st_mode & S_IXOTH) ? "x " : "- ");
+
+                //print # of hard link (3rd column)
+                printf("%lu ", buf.st_nlink);
+
+                //print the owner of the file (4th column)
+                struct passwd *pwd2 = getpwuid(buf.st_uid);
+                printf("%s ", pwd2->pw_name);
+
+                //print the name of the group file belongs to (5th column)
+                struct group *grp2 = getgrgid(buf.st_gid);
+                printf("%s", grp2->gr_name);
+
+                //print the size of the file in bytes (6th column)
+                printf("%8ld ", buf.st_size); //Size being occupied by 8 characters (changeable) to align numbers to the right
+                
+                //print the date and time of the most recent change (7th column)
+                time_t lastModified2 = buf.st_mtime;
+                struct tm* time2;
+                time2 = localtime(&lastModified2);
+                char buffer2[80];
+                strftime(buffer2, 80, "%b %e %Y %H:%M", time2);
+                printf("%s ", buffer2);
+
+                //print the name of the file or directory (8th column)
+                printf("%s \n", dp->d_name);
+                
                 break;
 
             default:
@@ -124,6 +207,15 @@ void readInput()
                             break;
                         }
                         if(strcmp(token, "..") == 0){
+                            //fix
+
+
+
+
+
+
+
+
                         }
                         //printf("%s\n", token);
                         
