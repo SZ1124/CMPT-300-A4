@@ -25,9 +25,71 @@ void init()
 {
     directoryList = List_create();
     char cwd[1024];
+
     if (getcwd(cwd, sizeof(cwd)) != NULL) {
+
         current_directory = malloc(strlen(cwd) + 1);
         strcpy(current_directory, cwd);
+            printf("Print cwd 1: %s\n", cwd);
+
+        char* last_slash = strrchr(cwd, '/');
+
+        if(last_slash != NULL)
+        {
+            *last_slash = '\0';
+            printf("Print cwd 2:  %s\n", cwd);
+
+            // if (access(cwd, F_OK) != -1) {
+            // printf("Directory exists.\n");
+
+            //     // Check read permission
+            //     if (access(cwd, R_OK) != -1) {
+            //         printf("Read permission is granted.\n");
+            //     } else {
+            //         printf("No read permission.\n");
+            //     }
+
+            //     // Check write permission
+            //     if (access(cwd, W_OK) != -1) {
+            //         printf("Write permission is granted.\n");
+            //     } else {
+            //         printf("No write permission.\n");
+            //     }
+
+            //     // Check execute permission
+            //     if (access(cwd, X_OK) != -1) {
+            //         printf("Execute permission is granted.\n");
+            //     } else {
+            //         printf("No execute permission.\n");
+            //     }
+            // } else {
+            //     printf("Directory does not exist.\n");
+            // }
+
+            // if (access(cwd, F_OK) != -1) {
+            //     // Read the target of the symlink
+            //     char buf[1024];
+            //     ssize_t len = readlink(cwd, buf, sizeof(buf)-1);
+            //     if (len != -1) {
+            //         buf[len] = '\0';
+            //         printf("Symlink '%s' points to: '%s'\n", cwd, buf);
+
+            //         // Check if the target of the symlink exists
+            //         if (access(buf, F_OK) == -1) {
+            //             printf("Target '%s' does not exist.\n", buf);
+            //         }
+            //     } else {
+            //         perror("readlink");
+            //     }
+            // } else {
+            //     perror("access");
+            // }
+
+            parent_directory = malloc(strlen(cwd) + 1);
+            strcpy(parent_directory, cwd);
+
+            *last_slash = '/'; // Restore the last slash
+        }
     } else {
         perror("getcwd");
     }
@@ -49,95 +111,114 @@ void readDirectory()
             continue;
         }
 
-        if (stat(dp->d_name, &buf) == -1) {
-            perror("Error retrieving file information");
-            continue;
-        }
+        //printf("%s \n", dp->d_name);
+        stat(dp->d_name, &buf);
+        // if (stat(dp->d_name, &buf) == -1) {
+        //     printf("%s \n", dp->d_name);
+        //     perror("Error retrieving file information");
+        //     continue;
+        // }
         switch(flag){
+            //issue about ls .. -i !
+            case 0:
+                if(strncmp(dp->d_name, ".", 1) != 0)
+                {
+                    printf("%s \n", dp->d_name);
+                }
+                break;
+
             case 1:
-                printf("%ld %s \n", buf.st_ino, dp->d_name);
+                if(strncmp(dp->d_name, ".", 1) != 0)
+                {
+                    printf("%ld %s \n", buf.st_ino, dp->d_name);
+                }
                 break;
 
             case 2:
-                //print permission (1st column)
-                printf("%c", (S_ISDIR(buf.st_mode)) ? 'd' : '-');
-                printf((buf.st_mode & S_IRUSR) ? "r" : "-");
-                printf((buf.st_mode & S_IWUSR) ? "w" : "-");
-                printf((buf.st_mode & S_IXUSR) ? "x" : "-");
-                printf((buf.st_mode & S_IRGRP) ? "r" : "-");
-                printf((buf.st_mode & S_IWGRP) ? "w" : "-");
-                printf((buf.st_mode & S_IXGRP) ? "x" : "-");
-                printf((buf.st_mode & S_IROTH) ? "r" : "-");
-                printf((buf.st_mode & S_IWOTH) ? "w" : "-");
-                printf((buf.st_mode & S_IXOTH) ? "x " : "- ");
+                if(strncmp(dp->d_name, ".", 1) != 0)
+                {
+                    //print permission (1st column)
+                    printf("%c", (S_ISDIR(buf.st_mode)) ? 'd' : '-');
+                    printf((buf.st_mode & S_IRUSR) ? "r" : "-");
+                    printf((buf.st_mode & S_IWUSR) ? "w" : "-");
+                    printf((buf.st_mode & S_IXUSR) ? "x" : "-");
+                    printf((buf.st_mode & S_IRGRP) ? "r" : "-");
+                    printf((buf.st_mode & S_IWGRP) ? "w" : "-");
+                    printf((buf.st_mode & S_IXGRP) ? "x" : "-");
+                    printf((buf.st_mode & S_IROTH) ? "r" : "-");
+                    printf((buf.st_mode & S_IWOTH) ? "w" : "-");
+                    printf((buf.st_mode & S_IXOTH) ? "x " : "- ");
 
-                //print # of hard link (2nd column)
-                printf("%lu ", buf.st_nlink);
+                    //print # of hard link (2nd column)
+                    printf("%lu ", buf.st_nlink);
 
-                //print the owner of the file (3rd column)
-                struct passwd *pwd1 = getpwuid(buf.st_uid);
-                printf("%s ", pwd1->pw_name);
+                    //print the owner of the file (3rd column)
+                    struct passwd *pwd1 = getpwuid(buf.st_uid);
+                    printf("%s ", pwd1->pw_name);
 
-                //print the name of the group file belongs to (4th column)
-                struct group *grp1 = getgrgid(buf.st_gid);
-                printf("%s", grp1->gr_name);
+                    //print the name of the group file belongs to (4th column)
+                    struct group *grp1 = getgrgid(buf.st_gid);
+                    printf("%s", grp1->gr_name);
 
-                //print the size of the file in bytes (5th column)
-                printf("%8ld ", buf.st_size); //Size being occupied by 8 characters (changeable) to align numbers to the right
-                
-                //print the date and time of the most recent change (6th column)
-                time_t lastModified1 = buf.st_mtime;
-                struct tm* time1;
-                time1 = localtime(&lastModified1);
-                char buffer1[80];
-                strftime(buffer1, 80, "%b %e %Y %H:%M", time1);
-                printf("%s ", buffer1);
+                    //print the size of the file in bytes (5th column)
+                    printf("%8ld ", buf.st_size); //Size being occupied by 8 characters (changeable) to align numbers to the right
+                    
+                    //print the date and time of the most recent change (6th column)
+                    time_t lastModified1 = buf.st_mtime;
+                    struct tm* time1;
+                    time1 = localtime(&lastModified1);
+                    char buffer1[80];
+                    strftime(buffer1, 80, "%b %e %Y %H:%M", time1);
+                    printf("%s ", buffer1);
 
-                //print the name of the file or directory (7th column)
-                printf("%s \n", dp->d_name);
+                    //print the name of the file or directory (7th column)
+                    printf("%s \n", dp->d_name);
+                }
                 break;
 
             case 3:
-                //print serial number (1st column)
-                printf("%10ld ", buf.st_ino); //Size being occupied by 8 characters (changeable) to align numbers to the right
+                if(strncmp(dp->d_name, ".", 1) != 0)
+                {
+                    //print serial number (1st column)
+                    printf("%10ld ", buf.st_ino); //Size being occupied by 10 characters (changeable) to align numbers to the right
 
-                //print permission (2nd column)
-                printf("%c", (S_ISDIR(buf.st_mode)) ? 'd' : '-');
-                printf((buf.st_mode & S_IRUSR) ? "r" : "-");
-                printf((buf.st_mode & S_IWUSR) ? "w" : "-");
-                printf((buf.st_mode & S_IXUSR) ? "x" : "-");
-                printf((buf.st_mode & S_IRGRP) ? "r" : "-");
-                printf((buf.st_mode & S_IWGRP) ? "w" : "-");
-                printf((buf.st_mode & S_IXGRP) ? "x" : "-");
-                printf((buf.st_mode & S_IROTH) ? "r" : "-");
-                printf((buf.st_mode & S_IWOTH) ? "w" : "-");
-                printf((buf.st_mode & S_IXOTH) ? "x " : "- ");
+                    //print permission (2nd column)
+                    printf("%c", (S_ISDIR(buf.st_mode)) ? 'd' : '-');
+                    printf((buf.st_mode & S_IRUSR) ? "r" : "-");
+                    printf((buf.st_mode & S_IWUSR) ? "w" : "-");
+                    printf((buf.st_mode & S_IXUSR) ? "x" : "-");
+                    printf((buf.st_mode & S_IRGRP) ? "r" : "-");
+                    printf((buf.st_mode & S_IWGRP) ? "w" : "-");
+                    printf((buf.st_mode & S_IXGRP) ? "x" : "-");
+                    printf((buf.st_mode & S_IROTH) ? "r" : "-");
+                    printf((buf.st_mode & S_IWOTH) ? "w" : "-");
+                    printf((buf.st_mode & S_IXOTH) ? "x " : "- ");
 
-                //print # of hard link (3rd column)
-                printf("%lu ", buf.st_nlink);
+                    //print # of hard link (3rd column)
+                    printf("%lu ", buf.st_nlink);
 
-                //print the owner of the file (4th column)
-                struct passwd *pwd2 = getpwuid(buf.st_uid);
-                printf("%s ", pwd2->pw_name);
+                    //print the owner of the file (4th column)
+                    struct passwd *pwd2 = getpwuid(buf.st_uid);
+                    printf("%s ", pwd2->pw_name);
 
-                //print the name of the group file belongs to (5th column)
-                struct group *grp2 = getgrgid(buf.st_gid);
-                printf("%s", grp2->gr_name);
+                    //print the name of the group file belongs to (5th column)
+                    struct group *grp2 = getgrgid(buf.st_gid);
+                    printf("%s", grp2->gr_name);
 
-                //print the size of the file in bytes (6th column)
-                printf("%8ld ", buf.st_size); //Size being occupied by 8 characters (changeable) to align numbers to the right
-                
-                //print the date and time of the most recent change (7th column)
-                time_t lastModified2 = buf.st_mtime;
-                struct tm* time2;
-                time2 = localtime(&lastModified2);
-                char buffer2[80];
-                strftime(buffer2, 80, "%b %e %Y %H:%M", time2);
-                printf("%s ", buffer2);
+                    //print the size of the file in bytes (6th column)
+                    printf("%8ld ", buf.st_size); //Size being occupied by 8 characters (changeable) to align numbers to the right
+                    
+                    //print the date and time of the most recent change (7th column)
+                    time_t lastModified2 = buf.st_mtime;
+                    struct tm* time2;
+                    time2 = localtime(&lastModified2);
+                    char buffer2[80];
+                    strftime(buffer2, 80, "%b %e %Y %H:%M", time2);
+                    printf("%s ", buffer2);
 
-                //print the name of the file or directory (8th column)
-                printf("%s \n", dp->d_name);
-                
+                    //print the name of the file or directory (8th column)
+                    printf("%s \n", dp->d_name);
+                }
                 break;
 
             default:
@@ -206,16 +287,15 @@ void readInput()
                             List_prepend(directoryList, current_directory);
                             break;
                         }
-                        if(strcmp(token, "..") == 0){
+                        else if(strcmp(token, "..") == 0){
+                            List_prepend(directoryList, parent_directory);
+                            break;
+                        }
+                        else if(strcmp(token, "/") == 0){
                             //fix
-
-
-
-
-
-
-
-
+                        }
+                        else if(strcmp(token, "~") == 0){
+                            //fix
                         }
                         //printf("%s\n", token);
                         
