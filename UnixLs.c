@@ -19,7 +19,7 @@ int stage = 0;
 List* directoryList; // could use a list here.
 char* current_directory;
 char* parent_directory;
-char* root_directory;
+char* home_directory;
 
 void init()
 {
@@ -30,14 +30,17 @@ void init()
 
         current_directory = malloc(strlen(cwd) + 1);
         strcpy(current_directory, cwd);
-            printf("Print cwd 1: %s\n", cwd);
+        //printf("Print cwd current: %s\n", cwd);
+        
+        home_directory = getenv("HOME");
+        printf("Home directory: %s\n", home_directory);
 
         char* last_slash = strrchr(cwd, '/');
 
         if(last_slash != NULL)
         {
             *last_slash = '\0';
-            printf("Print cwd 2:  %s\n", cwd);
+            printf("Print cwd parent:  %s\n", cwd);
 
             // if (access(cwd, F_OK) != -1) {
             // printf("Directory exists.\n");
@@ -107,17 +110,29 @@ void readDirectory()
     struct dirent* dp; 
     struct stat buf; 
     while ((dp = readdir(d)) != NULL) {
-        if (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0 || strcmp(dp->d_name, ".git") == 0) {
+
+        char full_path[1024]; // Adjust the size as needed
+        snprintf(full_path, sizeof(full_path), "%s/%s", directory_path, dp->d_name);
+        
+
+        if (stat(full_path, &buf) == -1) {
+            perror("Error getting file status.\n");
             continue;
         }
+        else {
+            if (lstat(full_path, &buf) == -1) {
+                perror("Error getting file status.\n");
+                continue;
+            }
+        }
 
-        //printf("%s \n", dp->d_name);
-        stat(dp->d_name, &buf);
-        // if (stat(dp->d_name, &buf) == -1) {
-        //     printf("%s \n", dp->d_name);
-        //     perror("Error retrieving file information");
-        //     continue;
+        // if (buf.st_mode & S_IRUSR) {
+        //     printf("File is readable.\n");
+        // } else {
+        //     printf("File is not readable.\n");
         // }
+        //printf("%s\n", full_path);
+
         switch(flag){
             //issue about ls .. -i !
             case 0:
@@ -137,8 +152,21 @@ void readDirectory()
             case 2:
                 if(strncmp(dp->d_name, ".", 1) != 0)
                 {
+                    //printf("%s \n", dp->d_name);
+                    /*
+                    
+                        FIX:
+                            3. failing to read information about the /home directory in general
+                    
+                    */
                     //print permission (1st column)
-                    printf("%c", (S_ISDIR(buf.st_mode)) ? 'd' : '-');
+                    if (S_ISLNK(buf.st_mode)) {
+                        printf("l");
+                    } else if (S_ISDIR(buf.st_mode)) {
+                        printf("d");
+                    } else {
+                        printf("-");
+                    }
                     printf((buf.st_mode & S_IRUSR) ? "r" : "-");
                     printf((buf.st_mode & S_IWUSR) ? "w" : "-");
                     printf((buf.st_mode & S_IXUSR) ? "x" : "-");
@@ -148,13 +176,14 @@ void readDirectory()
                     printf((buf.st_mode & S_IROTH) ? "r" : "-");
                     printf((buf.st_mode & S_IWOTH) ? "w" : "-");
                     printf((buf.st_mode & S_IXOTH) ? "x " : "- ");
-
                     //print # of hard link (2nd column)
                     printf("%lu ", buf.st_nlink);
 
                     //print the owner of the file (3rd column)
                     struct passwd *pwd1 = getpwuid(buf.st_uid);
                     printf("%s ", pwd1->pw_name);
+
+
 
                     //print the name of the group file belongs to (4th column)
                     struct group *grp1 = getgrgid(buf.st_gid);
@@ -172,7 +201,15 @@ void readDirectory()
                     printf("%s ", buffer1);
 
                     //print the name of the file or directory (7th column)
-                    printf("%s \n", dp->d_name);
+                    printf("%s ", dp->d_name);
+
+                    //print the actual directory of the symbolic link (symbolic link only)
+                    if (S_ISLNK(buf.st_mode)) {
+                        printf("-> %s \n", full_path);
+                    }
+                    else{
+                        printf("\n");
+                    }
                 }
                 break;
 
@@ -180,7 +217,7 @@ void readDirectory()
                 if(strncmp(dp->d_name, ".", 1) != 0)
                 {
                     //print serial number (1st column)
-                    printf("%10ld ", buf.st_ino); //Size being occupied by 10 characters (changeable) to align numbers to the right
+                    printf("%ld ", buf.st_ino); //Size being occupied by 10 characters (changeable) to align numbers to the right
 
                     //print permission (2nd column)
                     printf("%c", (S_ISDIR(buf.st_mode)) ? 'd' : '-');
@@ -291,14 +328,11 @@ void readInput()
                             List_prepend(directoryList, parent_directory);
                             break;
                         }
-                        else if(strcmp(token, "/") == 0){
-                            //fix
-                        }
                         else if(strcmp(token, "~") == 0){
-                            //fix
+                            List_prepend(directoryList, home_directory);
+                            break;
+
                         }
-                        //printf("%s\n", token);
-                        
                         List_prepend(directoryList, token);
                     } 
                     flag |= temp;
@@ -308,6 +342,7 @@ void readInput()
                     List_prepend(directoryList, current_directory);
                 }
             }
+            printf("%d\n", flag);
         }
         while(List_count(directoryList) != 0){
             printf("directory: %s\n", (char*)List_curr(directoryList));
