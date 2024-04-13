@@ -273,6 +273,18 @@ void readInput()
                 while ((token = strtok(NULL, delim)) != NULL) {
                     // need to detect, the moment u see 
                     if (token[0] == '-' && stage == 0) {
+                        // if "-" options appear after directory(s)
+                        if(!checkOptionBeforeDirectory){
+                            //empty the prepended items
+                            for(int z = 0; z < count; z++){
+                                List_trim(directoryList);
+                            }
+
+                            printf("Invalid input format (Option needs to be before directory(s)). Please try again.\n\n");
+
+                            break;
+                        }
+
                         for(int i = 1; i < strlen(token); i++){
                             if(token[i] == 'i'){
                                 temp |= 1;
@@ -284,18 +296,6 @@ void readInput()
                                 List_prepend(directoryList, token);
                                 break;
                             }
-                        }
-
-                        // if "-" options appear after directory(s)
-                        if(!checkOptionBeforeDirectory){
-                            //empty the prepended items
-                            for(int z = 0; z < count; z++){
-                                List_trim(directoryList);
-                            }
-
-                            printf("Invalid input format (Option needs to be before directory(s)). Please try again.\n\n");
-
-                            break;
                         }
 
                     } 
@@ -330,9 +330,9 @@ void readInput()
                     flag |= temp;
                 }
                 
-                // if(List_count(directoryList) == 0 && ){
-                //     List_prepend(directoryList, current_directory);
-                // }
+                if(List_count(directoryList) == 0 && checkOptionBeforeDirectory){
+                    List_prepend(directoryList, current_directory);
+                }
             }
         }
 
