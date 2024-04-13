@@ -1,0 +1,442 @@
+sza190@asb9838nu-a08:~/CMPT300/CMPT-300-A4$ make
+gcc -std=c99 -Wall -g -D_POSIX_C_SOURCE=2000809L -c UnixLs.c -o UnixLs.o
+gcc -std=c99 -Wall -g -D_POSIX_C_SOURCE=2000809L -o UnixLs UnixLs.o list.o
+sza190@asb9838nu-a08:~/CMPT300/CMPT-300-A4$ ./UnixLs
+*****WELCOME TO UnixLs SIMULATION******
+
+Current directory: /home/sza190/CMPT300/CMPT-300-A4
+Home directory: /home/sza190
+Parent directory:  /home/sza190/CMPT300
+
+UnixLs -i
+/home/sza190/CMPT300/CMPT-300-A4: 
+4383547793 Makefile 
+4383547795 README.md 
+4383547798 UnixLs.c 
+4383547801 infodemo.c 
+4383547802 list.h 
+4383547804 list.o 
+5356389456 SampleOutput.txt 
+4540286251 TestFolder 
+4356680856 UnixLs.o 
+5504685670 UnixLs 
+
+
+
+UnixLs -l
+/home/sza190/CMPT300/CMPT-300-A4: 
+-rw-------     1 sza190 cmpt-csil-users     316 Apr 12 2024 13:44 Makefile 
+-rw-------     1 sza190 cmpt-csil-users      22 Apr 12 2024 13:44 README.md 
+-rw-------     1 sza190 cmpt-csil-users   11845 Apr 12 2024 16:45 UnixLs.c 
+-rw-------     1 sza190 cmpt-csil-users     893 Apr 12 2024 13:44 infodemo.c 
+-rw-------     1 sza190 cmpt-csil-users    5533 Apr 12 2024 13:44 list.h 
+-rw-------     1 sza190 cmpt-csil-users    8952 Apr 12 2024 13:44 list.o 
+-rw-------     1 sza190 cmpt-csil-users       3 Apr 12 2024 16:22 SampleOutput.txt 
+drwx------     2 sza190 cmpt-csil-users      44 Apr 12 2024 15:03 TestFolder 
+-rw-------     1 sza190 cmpt-csil-users   27832 Apr 12 2024 16:45 UnixLs.o 
+-rwx------     1 sza190 cmpt-csil-users   35408 Apr 12 2024 16:45 UnixLs 
+
+
+
+UnixLs -il
+/home/sza190/CMPT300/CMPT-300-A4: 
+4383547793 -rw-------     1 sza190 cmpt-csil-users     316 Apr 12 2024 13:44 Makefile 
+4383547795 -rw-------     1 sza190 cmpt-csil-users      22 Apr 12 2024 13:44 README.md 
+4383547798 -rw-------     1 sza190 cmpt-csil-users   11845 Apr 12 2024 16:45 UnixLs.c 
+4383547801 -rw-------     1 sza190 cmpt-csil-users     893 Apr 12 2024 13:44 infodemo.c 
+4383547802 -rw-------     1 sza190 cmpt-csil-users    5533 Apr 12 2024 13:44 list.h 
+4383547804 -rw-------     1 sza190 cmpt-csil-users    8952 Apr 12 2024 13:44 list.o 
+5356389456 -rw-------     1 sza190 cmpt-csil-users       3 Apr 12 2024 16:22 SampleOutput.txt 
+4540286251 drwx------     2 sza190 cmpt-csil-users      44 Apr 12 2024 15:03 TestFolder 
+4356680856 -rw-------     1 sza190 cmpt-csil-users   27832 Apr 12 2024 16:45 UnixLs.o 
+5504685670 -rwx------     1 sza190 cmpt-csil-users   35408 Apr 12 2024 16:45 UnixLs 
+
+
+
+UnixLs -li
+/home/sza190/CMPT300/CMPT-300-A4: 
+4383547793 -rw-------     1 sza190 cmpt-csil-users     316 Apr 12 2024 13:44 Makefile 
+4383547795 -rw-------     1 sza190 cmpt-csil-users      22 Apr 12 2024 13:44 README.md 
+4383547798 -rw-------     1 sza190 cmpt-csil-users   11845 Apr 12 2024 16:45 UnixLs.c 
+4383547801 -rw-------     1 sza190 cmpt-csil-users     893 Apr 12 2024 13:44 infodemo.c 
+4383547802 -rw-------     1 sza190 cmpt-csil-users    5533 Apr 12 2024 13:44 list.h 
+4383547804 -rw-------     1 sza190 cmpt-csil-users    8952 Apr 12 2024 13:44 list.o 
+5356389456 -rw-------     1 sza190 cmpt-csil-users       3 Apr 12 2024 16:22 SampleOutput.txt 
+4540286251 drwx------     2 sza190 cmpt-csil-users      44 Apr 12 2024 15:03 TestFolder 
+4356680856 -rw-------     1 sza190 cmpt-csil-users   27832 Apr 12 2024 16:45 UnixLs.o 
+5504685670 -rwx------     1 sza190 cmpt-csil-users   35408 Apr 12 2024 16:45 UnixLs 
+
+
+
+UnixLs
+/home/sza190/CMPT300/CMPT-300-A4: 
+Makefile 
+README.md 
+UnixLs.c 
+infodemo.c 
+list.h 
+list.o 
+SampleOutput.txt 
+TestFolder 
+UnixLs.o 
+UnixLs 
+
+
+
+UnixLs .
+/home/sza190/CMPT300/CMPT-300-A4: 
+Makefile 
+README.md 
+UnixLs.c 
+infodemo.c 
+list.h 
+list.o 
+SampleOutput.txt 
+TestFolder 
+UnixLs.o 
+UnixLs 
+
+
+
+UnixLs ..
+/home/sza190/CMPT300: 
+A1 
+A2 
+CMPT-300-A3 
+CMPT-300-A4 
+
+
+
+UnixLs ~
+/home/sza190: 
+sfuhome 
+Android 
+VirtualBox VMs 
+Desktop 
+Downloads 
+Templates 
+Public 
+Documents 
+Music 
+Pictures 
+Videos 
+snap 
+config 
+CMPT295 
+CMPT300 
+
+
+
+UnixLs /
+/: 
+libx32 
+usr 
+run 
+bin 
+dev 
+lib64 
+home 
+boot 
+lib32 
+root 
+swapfile 
+opt 
+localhome 
+srv 
+var 
+sys 
+lost+found 
+snap 
+tmp 
+etc 
+sbin 
+cdrom 
+lib 
+mnt 
+media 
+proc 
+
+
+
+UnixLs -i ~/
+/home/sza190: 
+      1489 sfuhome 
+ 257653126 Android 
+ 257653130 VirtualBox VMs 
+ 257676112 Desktop 
+2208486605 Downloads 
+4335239105 Templates 
+6539855558 Public 
+ 257676113 Documents 
+2211480965 Music 
+4337800733 Pictures 
+6539855559 Videos 
+4337811452 snap 
+ 257639063 config 
+4313627539 CMPT295 
+4307849745 CMPT300 
+
+
+
+UnixLs -i -l .. ~
+/home/sza190/CMPT300: 
+2178897281 drwxr-xr-x     2 sza190 cmpt-csil-users     102 Jan 29 2024 14:07 A1 
+ 117288296 drwx------     2 sza190 cmpt-csil-users     152 Feb 27 2024 22:33 A2 
+2186984406 drwx------     4 sza190 cmpt-csil-users     240 Mar 25 2024 00:01 CMPT-300-A3 
+4375538030 drwx------     4 sza190 cmpt-csil-users     233 Apr 12 2024 16:45 CMPT-300-A4 
+
+/home/sza190: 
+      1489 drwx------     2 sza190 domain users       0 Feb  8 2024 16:15 sfuhome 
+ 257653126 lrwxrwxrwx     1 sza190 cmpt-csil-users      39 Jan 20 2023 09:48 Android 
+ 257653130 lrwxrwxrwx     1 sza190 cmpt-csil-users      42 Jan 20 2023 09:48 VirtualBox VMs 
+ 257676112 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Desktop 
+2208486605 drwxr-xr-x     2 sza190 cmpt-csil-users      69 Apr 11 2024 17:50 Downloads 
+4335239105 drwxr-xr-x     2 sza190 cmpt-csil-users     269 Jan 23 2023 19:18 Templates 
+6539855558 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Public 
+ 257676113 drwxr-xr-x     6 sza190 cmpt-csil-users     101 Mar  3 2023 10:03 Documents 
+2211480965 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Music 
+4337800733 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Pictures 
+6539855559 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Videos 
+4337811452 drwx------     3 sza190 cmpt-csil-users      47 Apr 12 2024 13:39 snap 
+ 257639063 -rw-r--r--     1 sza190 cmpt-csil-users       0 May  8 2023 17:01 config 
+4313627539 drwxr-xr-x    10 sza190 cmpt-csil-users     236 Jan 11 2024 12:25 CMPT295 
+4307849745 drwxr-xr-x     6 sza190 cmpt-csil-users      84 Apr 12 2024 13:44 CMPT300 
+
+
+
+UnixLs -i -l
+/home/sza190/CMPT300/CMPT-300-A4: 
+4383547793 -rw-------     1 sza190 cmpt-csil-users     316 Apr 12 2024 13:44 Makefile 
+4383547795 -rw-------     1 sza190 cmpt-csil-users      22 Apr 12 2024 13:44 README.md 
+4383547798 -rw-------     1 sza190 cmpt-csil-users   11845 Apr 12 2024 16:45 UnixLs.c 
+4383547801 -rw-------     1 sza190 cmpt-csil-users     893 Apr 12 2024 13:44 infodemo.c 
+4383547802 -rw-------     1 sza190 cmpt-csil-users    5533 Apr 12 2024 13:44 list.h 
+4383547804 -rw-------     1 sza190 cmpt-csil-users    8952 Apr 12 2024 13:44 list.o 
+5356389456 -rw-------     1 sza190 cmpt-csil-users       3 Apr 12 2024 16:22 SampleOutput.txt 
+4540286251 drwx------     2 sza190 cmpt-csil-users      44 Apr 12 2024 15:03 TestFolder 
+4356680856 -rw-------     1 sza190 cmpt-csil-users   27832 Apr 12 2024 16:45 UnixLs.o 
+5504685670 -rwx------     1 sza190 cmpt-csil-users   35408 Apr 12 2024 16:45 UnixLs 
+
+
+
+UnixLs -l -i
+/home/sza190/CMPT300/CMPT-300-A4: 
+4383547793 -rw-------     1 sza190 cmpt-csil-users     316 Apr 12 2024 13:44 Makefile 
+4383547795 -rw-------     1 sza190 cmpt-csil-users      22 Apr 12 2024 13:44 README.md 
+4383547798 -rw-------     1 sza190 cmpt-csil-users   11845 Apr 12 2024 16:45 UnixLs.c 
+4383547801 -rw-------     1 sza190 cmpt-csil-users     893 Apr 12 2024 13:44 infodemo.c 
+4383547802 -rw-------     1 sza190 cmpt-csil-users    5533 Apr 12 2024 13:44 list.h 
+4383547804 -rw-------     1 sza190 cmpt-csil-users    8952 Apr 12 2024 13:44 list.o 
+5356389456 -rw-------     1 sza190 cmpt-csil-users       3 Apr 12 2024 16:22 SampleOutput.txt 
+4540286251 drwx------     2 sza190 cmpt-csil-users      44 Apr 12 2024 15:03 TestFolder 
+4356680856 -rw-------     1 sza190 cmpt-csil-users   27832 Apr 12 2024 16:45 UnixLs.o 
+5504685670 -rwx------     1 sza190 cmpt-csil-users   35408 Apr 12 2024 16:45 UnixLs 
+
+
+
+UnixLs -li . .. ~
+/home/sza190/CMPT300/CMPT-300-A4: 
+4383547793 -rw-------     1 sza190 cmpt-csil-users     316 Apr 12 2024 13:44 Makefile 
+4383547795 -rw-------     1 sza190 cmpt-csil-users      22 Apr 12 2024 13:44 README.md 
+4383547798 -rw-------     1 sza190 cmpt-csil-users   11845 Apr 12 2024 16:45 UnixLs.c 
+4383547801 -rw-------     1 sza190 cmpt-csil-users     893 Apr 12 2024 13:44 infodemo.c 
+4383547802 -rw-------     1 sza190 cmpt-csil-users    5533 Apr 12 2024 13:44 list.h 
+4383547804 -rw-------     1 sza190 cmpt-csil-users    8952 Apr 12 2024 13:44 list.o 
+5356389456 -rw-------     1 sza190 cmpt-csil-users       3 Apr 12 2024 16:22 SampleOutput.txt 
+4540286251 drwx------     2 sza190 cmpt-csil-users      44 Apr 12 2024 15:03 TestFolder 
+4356680856 -rw-------     1 sza190 cmpt-csil-users   27832 Apr 12 2024 16:45 UnixLs.o 
+5504685670 -rwx------     1 sza190 cmpt-csil-users   35408 Apr 12 2024 16:45 UnixLs 
+
+/home/sza190/CMPT300: 
+2178897281 drwxr-xr-x     2 sza190 cmpt-csil-users     102 Jan 29 2024 14:07 A1 
+ 117288296 drwx------     2 sza190 cmpt-csil-users     152 Feb 27 2024 22:33 A2 
+2186984406 drwx------     4 sza190 cmpt-csil-users     240 Mar 25 2024 00:01 CMPT-300-A3 
+4375538030 drwx------     4 sza190 cmpt-csil-users     233 Apr 12 2024 16:45 CMPT-300-A4 
+
+/home/sza190: 
+      1489 drwx------     2 sza190 domain users       0 Feb  8 2024 16:15 sfuhome 
+ 257653126 lrwxrwxrwx     1 sza190 cmpt-csil-users      39 Jan 20 2023 09:48 Android 
+ 257653130 lrwxrwxrwx     1 sza190 cmpt-csil-users      42 Jan 20 2023 09:48 VirtualBox VMs 
+ 257676112 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Desktop 
+2208486605 drwxr-xr-x     2 sza190 cmpt-csil-users      69 Apr 11 2024 17:50 Downloads 
+4335239105 drwxr-xr-x     2 sza190 cmpt-csil-users     269 Jan 23 2023 19:18 Templates 
+6539855558 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Public 
+ 257676113 drwxr-xr-x     6 sza190 cmpt-csil-users     101 Mar  3 2023 10:03 Documents 
+2211480965 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Music 
+4337800733 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Pictures 
+6539855559 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Videos 
+4337811452 drwx------     3 sza190 cmpt-csil-users      47 Apr 12 2024 13:39 snap 
+ 257639063 -rw-r--r--     1 sza190 cmpt-csil-users       0 May  8 2023 17:01 config 
+4313627539 drwxr-xr-x    10 sza190 cmpt-csil-users     236 Jan 11 2024 12:25 CMPT295 
+4307849745 drwxr-xr-x     6 sza190 cmpt-csil-users      84 Apr 12 2024 13:44 CMPT300 
+
+
+
+UnixLs -li /
+/: 
+        17 lrwxrwxrwx     1 root root      10 Feb  2 2024 03:49 libx32 
+  14417921 drwxr-xr-x    15 root root    4096 Feb  2 2024 12:13 usr 
+         1 drwxr-xr-x    45 root root    1400 Apr 12 2024 10:43 run 
+        13 lrwxrwxrwx     1 root root       7 Feb  2 2024 03:49 bin 
+         1 drwxr-xr-x    20 root root    5000 Apr 12 2024 03:10 dev 
+        16 lrwxrwxrwx     1 root root       9 Feb  2 2024 03:49 lib64 
+        64 drwxr-xr-x  6214 Unknown cmpt-csil-users  163840 Apr 11 2024 05:11 home 
+  33030145 drwxr-xr-x     4 root root    4096 Feb  2 2024 13:22 boot 
+        15 lrwxrwxrwx     1 root root       9 Feb  2 2024 03:49 lib32 
+  10485761 drwx------     8 root root    4096 Mar 26 2024 11:09 root 
+        12 -rw-------     1 root root2147483648 Feb  2 2024 03:49 swapfile 
+  25165825 drwxr-xr-x     7 root root    4096 Feb  2 2024 12:35 opt 
+  32243713 drwxr-xr-x     4 root root    4096 Feb  2 2024 12:05 localhome 
+  25296897 drwxr-xr-x     2 root root    4096 Aug  7 2023 15:52 srv 
+  34865153 drwxr-xr-x    15 root root    4096 Apr 12 2024 07:31 var 
+         1 dr-xr-xr-x    13 root root       0 Apr 12 2024 03:10 sys 
+        11 drwx------     2 root root   16384 Feb  2 2024 03:49 lost+found 
+   1572865 drwxr-xr-x    14 root root    4096 Feb  2 2024 13:02 snap 
+  29097985 drwxrwxrwx    25 root root    4096 Apr 12 2024 16:51 tmp 
+   7602177 drwxr-xr-x   187 root root   12288 Apr 12 2024 08:03 etc 
+        18 lrwxrwxrwx     1 root root       8 Feb  2 2024 03:49 sbin 
+   8912897 drwxrwxr-x     2 root root    4096 Feb  2 2024 03:50 cdrom 
+        14 lrwxrwxrwx     1 root root       7 Feb  2 2024 03:49 lib 
+   6029313 drwxr-xr-x     2 root root    4096 Aug  7 2023 15:52 mnt 
+  18087937 drwxr-xr-x     3 root root    4096 Feb  1 2024 19:54 media 
+         1 dr-xr-xr-x   622 root root       0 Apr 12 2024 03:10 proc 
+
+
+
+UnixLs -il / ~
+/: 
+        17 lrwxrwxrwx     1 root root      10 Feb  2 2024 03:49 libx32 
+  14417921 drwxr-xr-x    15 root root    4096 Feb  2 2024 12:13 usr 
+         1 drwxr-xr-x    45 root root    1400 Apr 12 2024 10:43 run 
+        13 lrwxrwxrwx     1 root root       7 Feb  2 2024 03:49 bin 
+         1 drwxr-xr-x    20 root root    5000 Apr 12 2024 03:10 dev 
+        16 lrwxrwxrwx     1 root root       9 Feb  2 2024 03:49 lib64 
+        64 drwxr-xr-x  6214 Unknown cmpt-csil-users  163840 Apr 11 2024 05:11 home 
+  33030145 drwxr-xr-x     4 root root    4096 Feb  2 2024 13:22 boot 
+        15 lrwxrwxrwx     1 root root       9 Feb  2 2024 03:49 lib32 
+  10485761 drwx------     8 root root    4096 Mar 26 2024 11:09 root 
+        12 -rw-------     1 root root2147483648 Feb  2 2024 03:49 swapfile 
+  25165825 drwxr-xr-x     7 root root    4096 Feb  2 2024 12:35 opt 
+  32243713 drwxr-xr-x     4 root root    4096 Feb  2 2024 12:05 localhome 
+  25296897 drwxr-xr-x     2 root root    4096 Aug  7 2023 15:52 srv 
+  34865153 drwxr-xr-x    15 root root    4096 Apr 12 2024 07:31 var 
+         1 dr-xr-xr-x    13 root root       0 Apr 12 2024 03:10 sys 
+        11 drwx------     2 root root   16384 Feb  2 2024 03:49 lost+found 
+   1572865 drwxr-xr-x    14 root root    4096 Feb  2 2024 13:02 snap 
+  29097985 drwxrwxrwx    25 root root    4096 Apr 12 2024 16:51 tmp 
+   7602177 drwxr-xr-x   187 root root   12288 Apr 12 2024 08:03 etc 
+        18 lrwxrwxrwx     1 root root       8 Feb  2 2024 03:49 sbin 
+   8912897 drwxrwxr-x     2 root root    4096 Feb  2 2024 03:50 cdrom 
+        14 lrwxrwxrwx     1 root root       7 Feb  2 2024 03:49 lib 
+   6029313 drwxr-xr-x     2 root root    4096 Aug  7 2023 15:52 mnt 
+  18087937 drwxr-xr-x     3 root root    4096 Feb  1 2024 19:54 media 
+         1 dr-xr-xr-x   622 root root       0 Apr 12 2024 03:10 proc 
+
+/home/sza190: 
+      1489 drwx------     2 sza190 domain users       0 Feb  8 2024 16:15 sfuhome 
+ 257653126 lrwxrwxrwx     1 sza190 cmpt-csil-users      39 Jan 20 2023 09:48 Android 
+ 257653130 lrwxrwxrwx     1 sza190 cmpt-csil-users      42 Jan 20 2023 09:48 VirtualBox VMs 
+ 257676112 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Desktop 
+2208486605 drwxr-xr-x     2 sza190 cmpt-csil-users      69 Apr 11 2024 17:50 Downloads 
+4335239105 drwxr-xr-x     2 sza190 cmpt-csil-users     269 Jan 23 2023 19:18 Templates 
+6539855558 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Public 
+ 257676113 drwxr-xr-x     6 sza190 cmpt-csil-users     101 Mar  3 2023 10:03 Documents 
+2211480965 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Music 
+4337800733 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Pictures 
+6539855559 drwxr-xr-x     2 sza190 cmpt-csil-users       6 Jan 20 2023 09:48 Videos 
+4337811452 drwx------     3 sza190 cmpt-csil-users      47 Apr 12 2024 13:39 snap 
+ 257639063 -rw-r--r--     1 sza190 cmpt-csil-users       0 May  8 2023 17:01 config 
+4313627539 drwxr-xr-x    10 sza190 cmpt-csil-users     236 Jan 11 2024 12:25 CMPT295 
+4307849745 drwxr-xr-x     6 sza190 cmpt-csil-users      84 Apr 12 2024 13:44 CMPT300 
+
+
+
+UnixLs ~ /
+/home/sza190: 
+sfuhome 
+Android 
+VirtualBox VMs 
+Desktop 
+Downloads 
+Templates 
+Public 
+Documents 
+Music 
+Pictures 
+Videos 
+snap 
+config 
+CMPT295 
+CMPT300 
+
+/: 
+libx32 
+usr 
+run 
+bin 
+dev 
+lib64 
+home 
+boot 
+lib32 
+root 
+swapfile 
+opt 
+localhome 
+srv 
+var 
+sys 
+lost+found 
+snap 
+tmp 
+etc 
+sbin 
+cdrom 
+lib 
+mnt 
+media 
+proc 
+
+
+
+UnixLs TestFolder
+TestFolder: 
+Test1 
+Test2 
+
+
+
+UnixLs asdf
+asdf: 
+Error opening directory.
+: No such file or directory
+UnixLs -x
+-x: 
+Error opening directory.
+: No such file or directory
+UnixLs /~~
+/~~: 
+Error opening directory.
+: No such file or directory
+UnixLs -ilililil
+/home/sza190/CMPT300/CMPT-300-A4: 
+4383547793 -rw-------     1 sza190 cmpt-csil-users     316 Apr 12 2024 13:44 Makefile 
+4383547795 -rw-------     1 sza190 cmpt-csil-users      22 Apr 12 2024 13:44 README.md 
+4383547798 -rw-------     1 sza190 cmpt-csil-users   12014 Apr 12 2024 17:18 UnixLs.c 
+4383547801 -rw-------     1 sza190 cmpt-csil-users     893 Apr 12 2024 13:44 infodemo.c 
+4383547802 -rw-------     1 sza190 cmpt-csil-users    5533 Apr 12 2024 13:44 list.h 
+4383547804 -rw-------     1 sza190 cmpt-csil-users    8952 Apr 12 2024 13:44 list.o 
+4315485743 -rw-------     1 sza190 cmpt-csil-users   15945 Apr 12 2024 17:13 SampleOutput.txt 
+4540286251 drwx------     2 sza190 cmpt-csil-users      44 Apr 12 2024 15:03 TestFolder 
+4300709488 -rw-------     1 sza190 cmpt-csil-users   27936 Apr 12 2024 17:19 UnixLs.o 
+4300709491 -rwx------     1 sza190 cmpt-csil-users   35416 Apr 12 2024 17:19 UnixLs 
+
+
+
+UnixLs -ilx
+-ilx: 
+Error opening directory.
+: No such file or directory
+UnixLs .. -il
+UnixLs . -i
+
