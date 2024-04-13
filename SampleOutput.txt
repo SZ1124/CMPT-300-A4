@@ -437,6 +437,9 @@ UnixLs -ilx
 -ilx: 
 Error opening directory.
 : No such file or directory
-UnixLs .. -il
-UnixLs . -i
 
+UnixLs . -i
+Invalid input format (Option needs to be before directory(s)). Please try again.
+
+UnixLs / -i ..
+Invalid input format (Option needs to be before directory(s)). Please try again.
